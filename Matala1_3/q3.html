@@ -1,0 +1,98 @@
+﻿
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <div>
+
+
+        <label for="country">Country</label><br>
+        <input type="text" id="country" name="country"><br><br />
+        <label for="hour">hour:</label><br>
+        <input type="text" id="hour" name="hour"><br><br>
+        <label for="min">minutes:</label><br>
+        <input type="text" id="minute" name="minute"><br><br>
+        <label for="sec">seconds:</label><br>
+        <input type="text" id="sec" name="sec"><br><br>
+
+        <button id="btnStart" onclick="Start()">Submit</button>
+    </div>
+    <div id="ph">
+
+    </div>
+    <script>
+        arr = [];
+        counter = 0;
+        function Clock(country, hour, min, sec) {
+            this.country = country;
+            this.hour = hour;
+            this.min = min;
+            this.sec = sec;
+            this.ConverToSeconds = ConverToSeconds;
+            this.show = show;
+
+        }
+
+        function Start() {
+           
+
+            Ccountry = document.getElementById("country").value;
+            Chour =Number(document.getElementById("hour").value);
+            Cminute =Number(document.getElementById("minute").value);
+            Csec = Number(document.getElementById("sec").value);
+            c1 = new Clock(Ccountry, Chour, Cminute, Csec);
+            document.getElementById("country").value = "";
+            document.getElementById("hour").value = "";
+            document.getElementById("minute").value = "";
+            document.getElementById("sec").value = "";
+            c1.ConverToSeconds = c1.ConverToSeconds();
+            c1.show = c1.show();
+            arr.push(c1);
+            counter++;
+
+            if (counter == 5) {
+                PrintStr = "";
+                for (var i = 0; i < arr.length; i++) {
+                    PrintStr += arr[i].show;
+                }
+                document.getElementById("ph").innerHTML = PrintStr;
+            }
+
+        }
+
+        function ConverToSeconds() {
+            hourNum = c1.hour * 3600;
+            minNum = c1.min * 60;
+            secNum = c1.sec;
+            TotalSec = hourNum + minNum + secNum;
+            return `${TotalSec}`;
+        }
+
+        function show() {
+            showStr = "";
+           chour= addZero(c1.hour);
+           cmin= addZero(c1.min);
+            csec = addZero(c1.sec);
+            showStr = `<p>Time is- ${chour}:${cmin}:${csec} Country: ${c1.country} Seconds: ${c1.ConverToSeconds}</p>`;
+           
+            return showStr;
+        }
+
+        function addZero(x) {
+            str = "";
+            arr1 = [];
+            if (x < 10) {
+                arr1.push(0);
+                arr1.push(x);
+                str = `${arr1[0]}${arr1[1]}`;
+            }
+            else str = x;
+            return str;
+        }
+
+    </script>
+</body>
+</html>

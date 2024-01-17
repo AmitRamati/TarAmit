@@ -1,0 +1,55 @@
+﻿
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div>
+
+        <button id="btnStart" onclick="StartFunc()">Start</button>
+        <input type="number" placeholder="Enter Number" id="StartVal" />
+        <button onclick="Increment()">+</button>
+        <button onclick="Go()">Go</button>
+    </div>
+    <div id="ph">
+
+    </div>
+
+    <script>
+        var GlobalNum = 0;
+        Counter = {
+            "num": GlobalNum,
+            "FirstFunc": StartFunc,
+            "SecFunc": Increment,
+            "GoFunc":Go
+        }
+
+        function StartFunc() {
+            GlobalNum = document.getElementById("StartVal").value;
+        }
+
+        function Increment() {
+            GlobalNum++;
+            document.getElementById("StartVal").value = GlobalNum;
+
+        }
+        function Go() {
+            str = "Numbers are: ";
+            arr = [];
+          
+            if (GlobalNum > 0) {
+                for (var i = 0; i <= GlobalNum; i++) {
+                    arr[i] = i;
+                    str += ` ${i} `;
+                }
+            }
+            document.getElementById("ph").innerHTML = str;
+           
+        }
+    </script>
+
+</body>
+</html>

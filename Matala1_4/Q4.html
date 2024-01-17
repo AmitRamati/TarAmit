@@ -1,0 +1,121 @@
+﻿
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body onload="f1()">
+    <div id="point-list">
+        <h2>Points:</h2>
+        <div id="points">
+
+        </div>
+    </div>
+    <div id="totaldistance">
+        <h2>Total Distance:</h2>
+        <p id="distance"></p>
+    </div>
+
+    <script>
+        function Point(x, y) {
+        this.x = x;
+        this.y = y;
+        this.show = show;
+        this.equals = equals;
+        }
+
+
+        function show() {
+        return `(${this.x},${this.y})`;
+        }
+
+        function equals(p) {
+        return this.x==p.x && this.y==p.y
+        }
+
+        function CheackPoint(ArrPoints, PointX, PointY) {
+        for (var i = 0; i < ArrPoints.length; i++) {
+            if (ArrPoints[i].x == PointX && ArrPoints[i].y== PointY)
+            return true;
+        }
+        return false;
+        }
+
+        function CheackPointObj(ArrPoints, P) {
+        for (var i = 0; i < ArrPoints.length; i++) {
+            if (ArrPoints[i].equals(P))
+                return true;
+        }
+        return false;
+        }
+
+        function Distance(Point1, Point2) {
+            xDis = Point1.x - Point2.x;
+            yDis = Point1.y - Point2.y;
+            return Math.sqrt(xDis ** 2 + yDis ** 2);
+        }
+
+        function CalcTrip(ArrayP) {
+            total = 0;
+            for (var i = 0; i < ArrayP.length; i++) {
+                if (ArrayP[i + 1] != undefined) total += Distance(ArrayP[i], ArrayP[i + 1]);
+            }
+            return total;
+        }
+        function f1() {
+            PrintStr = "";
+            for (var i = 0; i < ArrPoints.length; i++) {
+                PrintStr += `<p>${ArrPoints[i].show()}</p>`;
+            }
+            document.getElementById("points").innerHTML = PrintStr;
+
+            CalcStr = "";
+            CalcStr += `<p>${CalcTrip(ArrPoints)}</p>`;
+            document.getElementById("totaldistance").innerHTML += CalcStr;
+
+        }
+      
+
+    ArrPoints = [];
+    p1 = new Point(1, 2);
+    p2 = new Point(3, 6);
+    p3 = new Point(9, 1);
+    p4 = new Point(8, 5);
+    ArrPoints.push(p1);
+    ArrPoints.push(p2);
+    ArrPoints.push(p3);
+    ArrPoints.push(p4);
+
+    //  q2 example:
+
+    xToCheck = 1;
+    yToCheck = 2;
+    isPointInArray = CheackPoint(ArrPoints, xToCheck, yToCheck);
+    console.log(`Is point (${xToCheck}, ${yToCheck}) in the array? ${isPointInArray}`);
+
+
+        //  q2 example:
+
+        xToCheck = -9;
+        yToCheck = 2;
+        isPointInArray = CheackPoint(ArrPoints, xToCheck, yToCheck);
+        console.log(`Is point (${xToCheck}, ${yToCheck}) in the array? ${isPointInArray}`);
+        
+
+        //  q3 example:
+
+        PointToCheck = new Point(1, 2);
+        isPointInArray2 = CheackPointObj(ArrPoints, PointToCheck);
+        console.log(`Is point ${PointToCheck.show()} in the array? ${isPointInArray2}`);
+
+        //  q3 example:
+
+        PointToCheck = new Point(-10, 2);
+        isPointInArray2 = CheackPointObj(ArrPoints, PointToCheck);
+        console.log(`Is point ${PointToCheck.show()} in the array? ${isPointInArray2}`);
+
+    </script>
+</body>
+</html>

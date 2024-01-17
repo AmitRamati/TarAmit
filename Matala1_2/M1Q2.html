@@ -1,0 +1,95 @@
+﻿
+<!DOCTYPE html>
+
+<head runat="server">
+    <title></title>
+    <style>
+        #myAudio{
+            display:none;
+        }
+        #img{
+           
+            height:100px;
+            width:100px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+       
+            <label for="fname">First name:</label><br>
+            <input type="text" id="fname" name="fname"><br><br />
+            <label for="lname">Color:</label><br>
+            <input type="text" id="color" name="color"><br><br>
+            <label for="lname">Age:</label><br>
+            <input type="text" id="age" name="age"><br><br>
+            <label for="lname">Weight:</label><br>
+            <input type="text" id="weight" name="weight"><br><br>
+            <button id="btnStart" onclick="Start()">Submit</button>
+  
+            <audio id="myAudio" controls="controls">
+                <source src="sound/quack.mp3" type="audio/mpeg" />
+            </audio>
+
+        
+    </div>
+    <div id="ph">
+      <div id="ph1">
+
+      </div>
+        <div id="ph2">
+
+        </div>
+    </div>
+   
+    <script>
+        function duck(name, color, age, weight, pic) {
+            this.name = name;
+            this.color = color;
+            this.age = age;
+            this.weight = weight;
+            this.pic = pic;
+            this.show = show;
+            this.quack = quack;
+            
+        }
+
+        function Start() {
+            str = "";
+            dname = document.getElementById("fname").value;
+            dcolor = document.getElementById("color").value;
+            dage = document.getElementById("age").value;
+            dweight = document.getElementById("weight").value;
+            d1 = new duck(dname, dcolor, dage, dweight);
+           
+
+            if (dname && dcolor && dage && dweight) {
+                str += `<button id="btnShow" onclick="show()">Show</button>`;
+                str += `<button id="btnQuack" onclick="quack()">Quack</button>`;
+                document.getElementById("btnStart").style.display = "none";
+                document.getElementById("ph1").innerHTML = str;
+            }
+            
+        }
+
+   
+        function show() {
+            
+            document.getElementById("ph2").innerHTML = "";
+            str = "";
+            str += `<br><p id="pDuck">Duck Name: ${dname}, Duck Color: ${dcolor}, Duck Age: ${dage}, Duck Weight: ${dweight}</p><br>`;
+            d1.pic = `<img id="img" src="sound/duckPic.jpg" />`;
+            str += `${d1.pic}`;
+            document.getElementById("ph2").innerHTML += str;
+           
+        }
+
+        function quack() {
+            document.getElementById("ph2").innerHTML = "";
+            var audio = document.getElementById("myAudio");
+            audio.play();
+        }
+
+    </script>
+</body>
+</html>
